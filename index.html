@@ -95,10 +95,12 @@ We conduct experiments on a VQ-VAE-based zero-shot VC to validate the proposed S
         <div class="col">
           <h2>System</h2>
           <div>
-		<p>baseline<a class="text-success" href="#2">[2]</a>:https://github.com/guanlongzhao/fac-via-ppg</p>
-		<p>proposed system1:CBHG encoder+GMM Attention</p>
-		<p>proposed system2:mel reference encoder + CBHG encoder+GMM Attention</p>
-		<p>proposed system3:mel and phone sequence reference encoder+CBHG encoder+GMM Attention</p>
+		<p>VQ-VAE (baseline) </p>
+		<p>SAT-VQ-VAE-3L-HALF </p>
+		<p>SAT-VQ-VAE-3L-ALL </p>
+		<p>SAT-VQ-VAE-6L-HALF </p>
+		<p>SAT-VQ-VAE-6L-ALL </p>
+		<p>Only SAT-VQ-VAE-6L-ALL can outperform VQ-VAE baseline </p>
 		<br>
           </div>
         </div>
@@ -108,9 +110,8 @@ We conduct experiments on a VQ-VAE-based zero-shot VC to validate the proposed S
       <div class="row" id="result">
         <div class="col-md-12">
           <h2>Speech Samples</h2>
-          <p>Using ZHAA as source accent;
+          <p>
           <br>
-          Using TTS generate audio as target accent;
 		  </p>
 		  
                   <div class="big-screen">
@@ -120,11 +121,11 @@ We conduct experiments on a VQ-VAE-based zero-shot VC to validate the proposed S
                           <th></th>
                           <th class="text-center">Source</th>
                           <th class="text-center">Target</th>
-			  <th class="text-center">system1</th>
-			  <th class="text-center">system2</th>
-			  <th class="text-center">system3</th>
-			  <th class="text-center">system4</th>
-			  <th class="text-center">system5</th>
+			  <th class="text-center">VQ-VAE </th>
+			  <th class="text-center">SAT-VQ-VAE-3L-HALF </th>
+			  <th class="text-center">SAT-VQ-VAE-3L-ALL </th>
+			  <th class="text-center">SAT-VQ-VAE-6L-HALF </th>
+			  <th class="text-center">SAT-VQ-VAE-6L-ALL </th>
                         </tr>
                       </thead>
                       <tbody>	      
