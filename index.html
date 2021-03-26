@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta name="google-site-verification" content="ftFOlJETX-2KNjaPh8W6s8lhigItRuu9fOmjHZZ0nY0" />
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+  <title>Self-supervised Audio Transformers over Log Mel-Spectrogram for Voice Conversion</title>
+</head>
+<style type="text/css">
+  table {
+    width: 100%;
+    table-layout: fixed;
+  }
+
+  audio {
+    width: 100%;
+  }
+
+  thead>tr>th:first-child {
+    width: 96px;
+  }
+
+  @media (max-width: 767px) {
+    .big-screen {
+      display: none;
+    }
+  }
+
+  @media (min-width: 767px) {
+    .small-screen {
+      display: none;
+    }
+  }
+p.normal {font-weight: normal}
+p.thick {font-weight: bold}
+p.thicker {font-weight: 900}
+</style>
+
+
+<body>
+  <header class="header">
+    <div class="jumbotron bg-secondary text-center">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-md-12">
+            <h1><a class="text-light">
+				 Self-supervised Audio Transformers over Log Mel-Spectrogram for Voice Conversion<br> </a></h1>
+            <p>
+              <div class="row">
+                <div class="col-md col-sm-12"><a class="text-light">Xiao Kang, Jichen Yang, Zhihua Huang, Hao Huang</a> </div>
+              </div>
+            </p>
+	      <p><a class="text-light">School of Information Science and Engineering, Xinjiang University, Urumqi, China<br></p></a>
+	      <p><a class="text-light">School of Electronic and Information Engineering, South China University of Technology, Guangzhou, China<br></p></a>
+				
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <main>
+    <div class="container">
+      <div class="row" id="monolingual">
+        <div class="col">
+          <h2>Abstract</h2>
+          <div>
+            <p align=¡±justify¡±> 
+		In contrast to many state-of-the-art voice conversion (VC) systems that directly using log Mel-spectrogram (LMS) as the input, we propose a novel high-level acoustic feature for VC using a self-supervised audio transformers (SAT) based model trained on LMS, named SAT-LMS. Self-supervised training allows the SAT to learn high-level and context information from a large amount of unlabeled data. Thus, VC systems trained with SAT-LMS as input can benefit from knowledge extracted from unlabeled LMS. 
+We conduct experiments on a VQ-VAE-based zero-shot VC to validate the proposed SAT-LMS. Experimental results show that the proposed SAT-LMS feature improves both the naturalness of converted speech and its similarity to a recorded speaker compared with LMS on the condition that we use enough training data and suitable model size for SAT.</p>
+          </div>
+        </div>
+      </div>
+      </div>
+    <hr>
+    <div class="container">
+      <div class="row" id="monolingual">
+        <div class="col">
+          <h2>Notes</h2>
+          <div>
+            <p> ZHAA's native language is Arabic</p>
+	    <p>	Dataset (L2-ARCTIC corpus) <a class="text-success" href="#1">[1]</a>: https://psi.engr.tamu.edu/l2-arctic-corpus</p>
+	    <p>	Please view this page in Google Chrome or Microsoft Edge for best quality</p>
+          </div>
+        </div>
+      </div>
+      <hr>
+      <div class="row" id="monolingual">
+        <div class="col">
+          <h2>System</h2>
+          <div>
+		<p>baseline<a class="text-success" href="#2">[2]</a>:https://github.com/guanlongzhao/fac-via-ppg</p>
+		<p>proposed system1:CBHG encoder+GMM Attention</p>
+		<p>proposed system2:mel reference encoder + CBHG encoder+GMM Attention</p>
+		<p>proposed system3:mel and phone sequence reference encoder+CBHG encoder+GMM Attention</p>
+		<br>
+          </div>
+        </div>
+      </div>
+
+      <hr>
+      <div class="row" id="result">
+        <div class="col-md-12">
+          <h2>Speech Samples</h2>
+          <p>Using ZHAA as source accent;
+          <br>
+          Using TTS generate audio as target accent;
+		  </p>
+		  
+                  <div class="big-screen">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th></th>
+                          <th class="text-center">ZHAA</th>
+                          <th class="text-center">Baseline</th>
+			  <th class="text-center">proposed system1</th>
+			  <th class="text-center">proposed system2</th>
+			  <th class="text-center">proposed system3</th>
+			  <th class="text-center">TTS</th>
+                        </tr>
+                      </thead>
+                      <tbody>	      
+			  <tr>
+				<th scope="row"><font size=2>text</font></th>
+				<th colspan="6"><p class="normal">"The more his opponents grew excited the more Ernest deliberately excited them"</p></th>
+			  </tr>
+			  <tr>
+                          <th scope="row"><font size=2>Sample 1</font></th>
+                          <td>
+                            <audio controls>
+                              <source src="https://raw.githubusercontent.com/kal009l/kal009l.github.io/master/demo/zhaa/000002_.npy.wav" type="audio/wav" />
+                            </audio>
+                          </td>
+                          <td>
+                            <audio controls>
+                              <source src="https://raw.githubusercontent.com/kal009l/kal009l.github.io/master/demo/baseline/000002_.npy.wav" type="audio/wav" />
+                            </audio>
+                          </td>
+                          <td>
+                            <audio controls>
+                              <source src="https://raw.githubusercontent.com/kal009l/kal009l.github.io/master/demo/cbhg/000002_.npy.wav" type="audio/wav" />
+                            </audio>
+                          </td>
+						  <td>
+                            <audio controls>
+                              <source src="https://raw.githubusercontent.com/kal009l/kal009l.github.io/master/demo/mel_refer/000002_.npy.wav" type="audio/wav" />
+                            </audio>
+                          </td>
+                          <td>
+                            <audio controls>
+                              <source src="https://raw.githubusercontent.com/kal009l/kal009l.github.io/master/demo/mel_text_refer/000002_.npy.wav" type="audio/wav" />
+                            </audio>
+                          </td>
+			  <td>
+                            <audio controls>
+                              <source src="https://raw.githubusercontent.com/kal009l/kal009l.github.io/master/demo/tts/000002_.npy.wav" type="audio/wav" />
+                            </audio>
+                          </td>
+                        </tr>
+						
+			<tr>
+				<th scope="row"><font size=2>text</font></th>
+				<th colspan="6"><p class="normal">"Violation of this law was made a high misdemeanor and punished accordingly"</th>
+			</tr>			
+			<tr>
+                          <th scope="row"><font size=2>Sample 2</font></th>
+                          <td>
+                            <audio controls>
+                              <source src="https://raw.githubusercontent.com/kal009l/kal009l.github.io/master/demo/zhaa/000021_.npy.wav" type="audio/wav" />
+                            </audio>
+                          </td>
+                          <td>
+                            <audio controls>
+                              <source src="https://raw.githubusercontent.com/kal009l/kal009l.github.io/master/demo/baseline/000021_.npy.wav" type="audio/wav" />
+                            </audio>
+                          </td>
+                          <td>
+                            <audio controls>
+                              <source src="https://raw.githubusercontent.com/kal009l/kal009l.github.io/master/demo/cbhg/000021_.npy.wav" type="audio/wav" />
+                            </audio>
+                          </td>
+			  <td>
+                            <audio controls>
+                              <source src="https://raw.githubusercontent.com/kal009l/kal009l.github.io/master/demo/mel_refer/000021_.npy.wav" type="audio/wav" />
+                            </audio>
+                          </td>
+                          <td>
+                            <audio controls>
+                              <source src="https://raw.githubusercontent.com/kal009l/kal009l.github.io/master/demo/mel_text_refer/000021_.npy.wav" type="audio/wav" />
+                            </audio>
+                          </td>
+			  <td>
+                            <audio controls>
+                              <source src="https://raw.githubusercontent.com/kal009l/kal009l.github.io/master/demo/tts/000021_.npy.wav" type="audio/wav" />
+                            </audio>
+                          </td>
+                        </tr>			
+						
+			<tr>
+				<th scope="row"><font size=2>text</font></th>
+				<th colspan="6"><p class="normal">"The flower of the artistic and intellectual world were revolutionists"</p></th>
+			</tr>			
+			<tr>
+                          <th scope="row"><font size=2>Sample 3</font></th>
+                          <td>
+                            <audio controls>
+                              <source src="https://raw.githubusercontent.com/kal009l/kal009l.github.io/master/demo/zhaa/000025_.npy.wav" type="audio/wav" />
+                            </audio>
+                          </td>
+                          <td>
+                            <audio controls>
+                              <source src="https://raw.githubusercontent.com/kal009l/kal009l.github.io/master/demo/baseline/000025_.npy.wav" type="audio/wav" />
+                            </audio>
+                          </td>
+                          <td>
+                            <audio controls>
+                              <source src="https://raw.githubusercontent.com/kal009l/kal009l.github.io/master/demo/cbhg/000025_.npy.wav" type="audio/wav" />
+                            </audio>
+                          </td>
+			  <td>
+                            <audio controls>
+                              <source src="https://raw.githubusercontent.com/kal009l/kal009l.github.io/master/demo/mel_refer/000025_.npy.wav" type="audio/wav" />
+                            </audio>
+                          </td>
+                          <td>
+                            <audio controls>
+                              <source src="https://raw.githubusercontent.com/kal009l/kal009l.github.io/master/demo/mel_text_refer/000025_.npy.wav" type="audio/wav" />
+                            </audio>
+                          </td>
+			  <td>
+                            <audio controls>
+                              <source src="https://raw.githubusercontent.com/kal009l/kal009l.github.io/master/demo/tts/000025_.npy.wav" type="audio/wav" />
+                            </audio>
+                          </td>
+                        </tr>
+						
+						
+			<tr>
+			<th scope="row"><font size=2>text</font></th>
+			<th colspan="6"><p class="normal">"The life there was healthful and athletic but too juvenile"</p></th>
+			</tr>
+			<tr>
+                          <th scope="row"><font size=2>Sample 4</font></th>
+                          <td>
+                            <audio controls>
+                              <source src="https://raw.githubusercontent.com/kal009l/kal009l.github.io/master/demo/zhaa/000046_.npy.wav" type="audio/wav" />
+                            </audio>
+                          </td>
+                          <td>
+                            <audio controls>
+                              <source src="https://raw.githubusercontent.com/kal009l/kal009l.github.io/master/demo/baseline/000046_.npy.wav" type="audio/wav" />
+                            </audio>
+                          </td>
+						  
+                          <td>
+                            <audio controls>
+                              <source src="https://raw.githubusercontent.com/kal009l/kal009l.github.io/master/demo/cbhg/000046_.npy.wav" type="audio/wav" />
+                            </audio>
+                          </td>
+			  <td>
+                            <audio controls>
+                              <source src="https://raw.githubusercontent.com/kal009l/kal009l.github.io/master/demo/mel_refer/000046_.npy.wav" type="audio/wav" />
+                            </audio>
+                          </td>
+                          <td>
+                            <audio controls>
+                              <source src="https://raw.githubusercontent.com/kal009l/kal009l.github.io/master/demo/mel_text_refer/000046_.npy.wav" type="audio/wav" />
+                            </audio>
+				</td>
+			  <td>
+                            <audio controls>
+                              <source src="https://raw.githubusercontent.com/kal009l/kal009l.github.io/master/demo/tts/000046_.npy.wav" type="audio/wav" />
+                            </audio>
+			</td>
+                        </tr>
+	<tr>
+			<th scope="row"><font size=2>text</font></th>
+			<th colspan="6"><p class="normal">"Did I possess too much vitality"</p></th>
+			</tr>
+			<tr>
+                          <th scope="row"><font size=2>Sample 5</font></th>
+                          <td>
+                            <audio controls>
+                              <source src="https://raw.githubusercontent.com/kal009l/kal009l.github.io/master/demo/zhaa/000049_.npy.wav" type="audio/wav" />
+                            </audio>
+                          </td>
+                          <td>
+                            <audio controls>
+                              <source src="https://raw.githubusercontent.com/kal009l/kal009l.github.io/master/demo/baseline/000049_.npy.wav" type="audio/wav" />
+                            </audio>
+                          </td>
+						  
+                          <td>
+                            <audio controls>
+                              <source src="https://raw.githubusercontent.com/kal009l/kal009l.github.io/master/demo/cbhg/000049_.npy.wav" type="audio/wav" />
+                            </audio>
+                          </td>
+			  <td>
+                            <audio controls>
+                              <source src="https://raw.githubusercontent.com/kal009l/kal009l.github.io/master/demo/mel_refer/000049_.npy.wav" type="audio/wav" />
+                            </audio>
+                          </td>
+                          <td>
+                            <audio controls>
+                              <source src="https://raw.githubusercontent.com/kal009l/kal009l.github.io/master/demo/mel_text_refer/000049_.npy.wav" type="audio/wav" />
+                            </audio>
+				</td>
+			  <td>
+                            <audio controls>
+                              <source src="https://raw.githubusercontent.com/kal009l/kal009l.github.io/master/demo/tts/000049_.npy.wav" type="audio/wav" />
+                            </audio>
+			</td>
+                        </tr>
+			<th scope="row"><font size=2>text</font></th>
+			<th colspan="6"><p class="normal">"That Longfellow chap most likely had written countless books of poetry"</p></th>
+			</tr>
+			<tr>
+                          <th scope="row"><font size=2>Sample 6</font></th>
+                          <td>
+                            <audio controls>
+                              <source src="https://raw.githubusercontent.com/kal009l/kal009l.github.io/master/demo/zhaa/000074_.npy.wav" type="audio/wav" />
+                            </audio>
+                          </td>
+                          <td>
+                            <audio controls>
+                              <source src="https://raw.githubusercontent.com/kal009l/kal009l.github.io/master/demo/baseline/000074_.npy.wav" type="audio/wav" />
+                            </audio>
+                          </td>
+						  
+                          <td>
+                            <audio controls>
+                              <source src="https://raw.githubusercontent.com/kal009l/kal009l.github.io/master/demo/cbhg/000074_.npy.wav" type="audio/wav" />
+                            </audio>
+                          </td>
+			  <td>
+                            <audio controls>
+                              <source src="https://raw.githubusercontent.com/kal009l/kal009l.github.io/master/demo/mel_refer/000074_.npy.wav" type="audio/wav" />
+                            </audio>
+                          </td>
+                          <td>
+                            <audio controls>
+                              <source src="https://raw.githubusercontent.com/kal009l/kal009l.github.io/master/demo/mel_text_refer/000074_.npy.wav" type="audio/wav" />
+                            </audio>
+				</td>
+			  <td>
+                            <audio controls>
+                              <source src="https://raw.githubusercontent.com/kal009l/kal009l.github.io/master/demo/tts/000074_.npy.wav" type="audio/wav" />
+                            </audio>
+			</td>
+                        </tr>
+
+	<tr>
+			<th scope="row"><font size=2>text</font></th>
+			<th colspan="6"><p class="normal">"The task we set ourselves was threefold"</p></th>
+			</tr>
+			<tr>
+                          <th scope="row"><font size=2>Sample 7</font></th>
+                          <td>
+                            <audio controls>
+                              <source src="https://raw.githubusercontent.com/kal009l/kal009l.github.io/master/demo/zhaa/000023_.npy.wav" type="audio/wav" />
+                            </audio>
+                          </td>
+                          <td>
+                            <audio controls>
+                              <source src="https://raw.githubusercontent.com/kal009l/kal009l.github.io/master/demo/baseline/000023_.npy.wav" type="audio/wav" />
+                            </audio>
+                          </td>
+						  
+                          <td>
+                            <audio controls>
+                              <source src="https://raw.githubusercontent.com/kal009l/kal009l.github.io/master/demo/cbhg/000023_.npy.wav" type="audio/wav" />
+                            </audio>
+                          </td>
+			  <td>
+                            <audio controls>
+                              <source src="https://raw.githubusercontent.com/kal009l/kal009l.github.io/master/demo/mel_refer/000023_.npy.wav" type="audio/wav" />
+                            </audio>
+                          </td>
+                          <td>
+                            <audio controls>
+                              <source src="https://raw.githubusercontent.com/kal009l/kal009l.github.io/master/demo/mel_text_refer/000023_.npy.wav" type="audio/wav" />
+                            </audio>
+				</td>
+			  <td>
+                            <audio controls>
+                              <source src="https://raw.githubusercontent.com/kal009l/kal009l.github.io/master/demo/tts/000023_.npy.wav" type="audio/wav" />
+                            </audio>
+			</td>
+                        </tr>
+						
+						
+			<tr>
+			<th scope="row"><font size=2>text</font></th>
+			<th colspan="6"><p class="normal">"Zilla relaxed her sour mouth long enough to sigh her satisfaction"</p></th>
+			</tr>			
+			<tr>
+                          <th scope="row"><font size=2>Sample 8</font></th>
+                          <td>
+                            <audio controls>
+                              <source src="https://raw.githubusercontent.com/kal009l/kal009l.github.io/master/demo/zhaa/000058_.npy.wav" type="audio/wav" />
+                            </audio>
+                          </td>
+                          <td>
+                            <audio controls>
+                              <source src="https://raw.githubusercontent.com/kal009l/kal009l.github.io/master/demo/baseline/000058_.npy.wav" type="audio/wav" />
+                            </audio>
+                          </td>
+						  
+                          <td>
+                            <audio controls>
+                              <source src="https://raw.githubusercontent.com/kal009l/kal009l.github.io/master/demo/cbhg/000058_.npy.wav" type="audio/wav" />
+                            </audio>
+                          </td>
+						  <td>
+                            <audio controls>
+                              <source src="https://raw.githubusercontent.com/kal009l/kal009l.github.io/master/demo/mel_refer/000058_.npy.wav" type="audio/wav" />
+                            </audio>
+                          </td>
+                          <td>
+                            <audio controls>
+                              <source src="https://raw.githubusercontent.com/kal009l/kal009l.github.io/master/demo/mel_text_refer/000058_.npy.wav" type="audio/wav" />
+                            </audio>
+                          </td>
+			  <td>
+                            <audio controls>
+                              <source src="https://raw.githubusercontent.com/kal009l/kal009l.github.io/master/demo/tts/000058_.npy.wav" type="audio/wav" />
+                            </audio>
+                          </td>
+			  </tr>
+			 </tbody>
+                    </table>
+                  </div>
+      <hr>		  		  
+      <div class="row" id="ref">
+        <div class="col">
+          <h2>References</h2>
+          <div>
+            <p>
+              <a name="1">[1]</a>
+              	Zhao, G., Sonsaat, S., Silpachai, A., Lucic, I., Chukharev-Hudilainen, E., Levis, J., & Gutierrez-Osuna<a class="text-success"
+                href="https://www.researchgate.net/profile/John_Levis/publication/327222258_L2-ARCTIC_A_Non-Native_English_Speech_Corpus/links/5b81441e4585151fd13192dc/L2-ARCTIC-A-Non-Native-English-Speech-Corpus.pdf">¡°Personalized,
+                L2-ARCTIC: A Non-native English Speech Corpus. Proc. Interspeech 2018, 2783-2787.</em>
+            </p>
+            <p>
+              <a name="2">[2]</a>
+              Zhao, G., Ding, S.& Gutierrez-Osuna, R. <a class="text-success"
+              href="https://pdfs.semanticscholar.org/e4b4/f148e4aad6827b4abe2922e16e6b62dc0abb.pdf">
+	      ¡°Foreign Accent Conversion by Synthesizing Speech from Phonetic Posteriorgrams. In Proc. Interspeech (pp. 2843-2847).</em>
+            </p>
+          </div>
+        </div>
+      </div>
+      <hr>
+      <!-- <div class="row" id="contact">
+          <div class="col">
+            <h2>Contact</h2>
+            <div></div>
+          </div>
+        </div> -->
+    </div>
+  </main>
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
